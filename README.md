@@ -21,9 +21,9 @@ If path to ffmpeg is already in PATH then just write `ffmpeg`
 
 That's it :smiley:
 
-##Usage
+## Usage
 
-## Creating a database
+### Creating a database
 First you need to create a database of songs which can be searched to identify a song.
 
 1. To do that put the songs that you want to include in db in the `raws` folder. You can put them somewhere else as well, if you do that just put the absolute path to that folder in `config.json`
@@ -34,7 +34,7 @@ python audio_db_creator.py
    
 You will see 2 files (`db.pickle` and `metadata.pickle`) in `db` folder. That is your database of songs. Again, you can put them somewhere else as well, just set absolute path in `config.json`
 
-## Searching
+### Searching
 
 Record songs with your computer/phone and put them in `recordings` folder. If you wish to put them somewhere else set path in `config.json`
 
