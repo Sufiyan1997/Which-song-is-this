@@ -21,15 +21,13 @@ if __name__ == "__main__":
     for s in raw_songs:
         print(s)
 
-        f = songs.convert_to_wav(s)
+        processed = songs.pre_process(os.path.join(raw_song_dir, s))
 
-        if f is None:
-            print(f,'file not supported')
+        if processed is None:
+            print(s,'file not supported')
             continue
         
-        rate,song = read(os.path.join(raw_song_dir, f))
-        
-        song = songs.stereo_to_mono(song)
+        rate,song = processed
 
         if(song.dtype == np.int16 and rate == 44100):
             print(s,': ACCEPTED')

@@ -2,6 +2,7 @@ import config
 import subprocess
 import os
 import numpy as np
+from scipy.io.wavfile import read
 
 def convert_to_wav(filepath):
     path_to_ffmpeg = config.get("pathToFfmpeg")
@@ -21,7 +22,18 @@ def convert_to_wav(filepath):
         return None
 
 def stereo_to_mono(song):
+    song = np.reshape(song, (song.shape[0], 1))
     if song.shape[1] == 2:
         song = song.astype(np.int)
         song = (song.sum(axis=1)/2).astype(np.int16)
     return song
+
+def pre_process(file):
+    wav_file = convert_to_wav(file)
+
+    if wav_file is None:
+        return None
+
+    rate, song = read(wav_file)
+    return rate, stereo_to_mono(song)
+    
