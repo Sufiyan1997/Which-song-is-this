@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 #extra
-raws/*
+raws
 !raws/.gitkeep
 db/*
 !db/.gitkeep
