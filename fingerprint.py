@@ -13,6 +13,7 @@ def downsample(song):
 
     return ans
 
+
 def butter_lowpass(cutoff, fs, order=5):
     nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
