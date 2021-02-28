@@ -22,10 +22,11 @@ def convert_to_wav(filepath):
         return None
 
 def stereo_to_mono(song):
-    song = np.reshape(song, (song.shape[0], 1))
     if song.shape[1] == 2:
         song = song.astype(np.int)
         song = (song.sum(axis=1)/2).astype(np.int16)
+    elif song.shape[1] == 0:
+        song = np.reshape(song, (song.shape[0], 1))
     return song
 
 def pre_process(file):
