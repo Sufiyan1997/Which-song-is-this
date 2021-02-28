@@ -33,6 +33,8 @@ def stereo_to_mono(song):
         song = np.reshape(song, (song.shape[0], 1))
     return song
 
+def validate_song(song, rate):
+    return song.dtype == np.int16 and rate == 44100
 
 def pre_process(file):
     wav_file = convert_to_wav(file)
