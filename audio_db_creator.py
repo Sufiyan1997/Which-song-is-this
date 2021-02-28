@@ -23,7 +23,7 @@ if __name__ == "__main__":
     db_dir = config.get("dbOutputDir")
     raw_songs = os.listdir(raw_song_dir)
 
-    # song_codes = {}
+    song_codes = {}
     code = 0
     db = {}
 
@@ -42,7 +42,7 @@ if __name__ == "__main__":
             print(s, ": ACCEPTED")
             fp = fingerprint.fingerprint_song(song, rate, code)
             merge(db, fp)
-            # song_codes[code] = (s, fp.shape[0])
+            song_codes[code] = s
             code += 1
         else:
             print(s, ": REJECTED", song.dtype, rate, song.shape)
@@ -51,6 +51,6 @@ if __name__ == "__main__":
     pickle.dump(db, f)
     f.close()
 
-    # f = open(os.path.join(db_dir, "metadata.pickle"), "wb")
-    # pickle.dump(song_codes, f)
-    # f.close()
+    f = open(os.path.join(db_dir, "metadata.pickle"), "wb")
+    pickle.dump(song_codes, f)
+    f.close()

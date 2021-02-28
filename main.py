@@ -29,8 +29,12 @@ if __name__ == "__main__":
             continue
         
         rate, audio = processed
-        result = match(audio,rate,db,songs_metadata)
-        print('song', result['song'], 'matched', result['matched'], 'start', result['start'])
+        result = match(audio,rate,db)
+        if result:
+            print('song is : ', songs_metadata[result])
+        else:
+            print('No match found')
+        
     
 
     
