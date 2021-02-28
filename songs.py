@@ -4,30 +4,35 @@ import os
 import numpy as np
 from scipy.io.wavfile import read
 
+
 def convert_to_wav(filepath):
     path_to_ffmpeg = config.get("pathToFfmpeg")
-    _,file_format = os.path.splitext(filepath)
-    
-    if file_format == '.mp3':
+    _, file_format = os.path.splitext(filepath)
+
+    if file_format == ".mp3":
         name_without_extension = os.path.basename(filepath).split(file_format)[0]
-        output_file = os.path.join(os.path.dirname(filepath), name_without_extension+".wav")
-        ret = subprocess.call([path_to_ffmpeg, '-i', filepath, output_file])
+        output_file = os.path.join(
+            os.path.dirname(filepath), name_without_extension + ".wav"
+        )
+        ret = subprocess.call([path_to_ffmpeg, "-i", filepath, output_file])
         if ret > 0:
             return output_file
         else:
             return None
-    elif file_format == '.wav':
+    elif file_format == ".wav":
         return filepath
     else:
         return None
 
+
 def stereo_to_mono(song):
     if song.shape[1] == 2:
         song = song.astype(np.int)
-        song = (song.sum(axis=1)/2).astype(np.int16)
+        song = (song.sum(axis=1) / 2).astype(np.int16)
     elif song.shape[1] == 0:
         song = np.reshape(song, (song.shape[0], 1))
     return song
+
 
 def pre_process(file):
     wav_file = convert_to_wav(file)
@@ -37,4 +42,3 @@ def pre_process(file):
 
     rate, song = read(wav_file)
     return rate, stereo_to_mono(song)
-    

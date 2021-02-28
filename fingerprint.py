@@ -67,7 +67,7 @@ def fingerprint(ft, song_id=None):
                 if song_id != None:
                     value = (time_freq_points[anchor_point][0], song_id)
                 else:
-                    value = (time_freq_points[anchor_point][0])
+                    value = time_freq_points[anchor_point][0]
 
                 if address in db:
                     db[address].append(value)
