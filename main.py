@@ -23,14 +23,9 @@ if __name__ == "__main__":
 
     for tf in test_files:
         print(tf)
-        processed = songs.pre_process(os.path.join(test_folder, tf))
-
-        if processed is None:
-            continue
-
-        rate, audio = processed
-        result = match(audio, rate, db)
-        if result:
-            print("song is : ", songs_metadata[result])
+        song_code, err_msg = match(os.path.join(test_folder, tf), db)
+        
+        if song_code != -1:
+            print("song is : ", songs_metadata[song_code])
         else:
             print("No match found")
