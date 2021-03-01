@@ -3,6 +3,7 @@ import pickle
 import config
 import songs
 import fingerprint
+import argparse
 
 
 def merge(main_dict, dict_to_add):
@@ -42,12 +43,22 @@ def create_db(song_list):
         else:
             print(song_filepath, ": REJECTED", song.dtype, rate, song.shape)
 
+    print("-"*10+"REPORT"+"-"*10)
+    print(str(code) + "songs added to db.")
+
     return db, song_codes
 
 if __name__ == "__main__":
 
-    raw_song_dir = config.get("rawSongDir")
-    db_dir = config.get("dbOutputDir")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("source", help="Path to directory which has songs to be added in db")
+    parser.add_argument("output", help="path to directory where db files will be stored")
+    args = parser.parse_args()
+
+    raw_song_dir = os.path.abspath(args.source)
+    db_dir = os.path.abspath(args.output)
+    print(raw_song_dir)
+    print(db_dir)
     raw_songs = [os.path.join(raw_song_dir, s) for s in os.listdir(raw_song_dir)]
 
     db, song_codes = create_db(raw_songs)

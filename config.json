@@ -1,7 +1,4 @@
 {
-    "rawSongDir" : "/home/phantom/Music",
-    "dbOutputDir" : "/home/phantom/code/Which-song-is-this/db",
-    "testSongDir" : "/home/phantom/code/Which-song-is-this/check",
     "pathToFfmpeg" : "/usr/bin/ffmpeg",
     "cutofffreq" : 4000,
     "filterOrder" : 6,
